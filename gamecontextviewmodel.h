@@ -13,8 +13,6 @@ class GameContextViewModel : public QObject
 {
     Q_OBJECT
 
-    Q_PROPERTY(bool isGameOver READ GetIsGameOver NOTIFY gameOver)
-
     Q_PROPERTY(float aimPosX READ GetAimPosX NOTIFY aimPosUpdated)
     Q_PROPERTY(float aimPosY READ GetAimPosY NOTIFY aimPosUpdated)
 
@@ -49,6 +47,7 @@ class GameContextViewModel : public QObject
 
     Q_PROPERTY(QString player1Score READ GetPlayer1Score NOTIFY playerScore);
     Q_PROPERTY(QString player2Score READ GetPlayer2Score NOTIFY playerScore);
+    Q_PROPERTY(QString gameWinner READ GetGameWinner NOTIFY gameOver)
 
     QML_ELEMENT
 public:
@@ -84,16 +83,18 @@ public:
     float GetPlayer2Hit4PosX() const;
     float GetPlayer2Hit4PosY() const;
 
-    QString GetPlayer1Score();
-    QString GetPlayer2Score();
+    QString GetPlayer1Score() const;
+    QString GetPlayer2Score() const;
 
-    bool GetIsGameOver() const;
+    QString GetGameWinner() const;
 
 private:
     void ResetGameState();
 
     void UpdateFirstPlayerScore();
     void UpdateSeconfPlayerScore();
+
+    bool GetIsGameOver() const;
 
 signals:
     void aimPosUpdated();

@@ -10,7 +10,7 @@ GameWindow {
     GameContextViewModel {
         id: gamecontext
         onGameOver: {
-            newGameButton.visible = true
+            resultPopUp.visible = true
             dartsMouseArea.cursorShape = Qt.ArrowCursor
         }
     }
@@ -164,26 +164,44 @@ GameWindow {
         }
 
         Rectangle {
-            id: newGameButton
-            width: 100
-            height: 50
-            color: "#32665a"
+            id: resultPopUp
+            width: 150
+            height: 100
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.verticalCenter:  parent.verticalCenter
             visible: false
 
             Text {
-                text: "New Game"
-                color: "white"
-                anchors.centerIn: parent
+                id: winnerString
+                text: gamecontext.gameWinner
+                color: "#32665a"
+                font.pixelSize: 16
+                anchors.top: parent.top
+                anchors.horizontalCenter: parent.horizontalCenter
             }
 
-            MouseArea {
-                anchors.fill: parent
-                onClicked: {
-                    parent.visible = false
-                    dartsMouseArea.cursorShape = Qt.BlankCursor
-                    gamecontext.onNewGameButtonClicked()
+            Rectangle {
+                id: newGameButton
+                width: 100
+                height: 50
+                color: "#32665a"
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.verticalCenter:  parent.verticalCenter
+
+
+                Text {
+                    text: "New Game"
+                    color: "white"
+                    anchors.centerIn: parent
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        resultPopUp.visible = false
+                        dartsMouseArea.cursorShape = Qt.BlankCursor
+                        gamecontext.onNewGameButtonClicked()
+                    }
                 }
             }
         }

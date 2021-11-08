@@ -235,16 +235,33 @@ float GameContextViewModel::GetPlayer2Hit4PosY() const
     return m_ScoreManager->GetYCoord(ScoreManager::Players::Player2, 3);
 }
 
-QString GameContextViewModel::GetPlayer1Score()
+QString GameContextViewModel::GetPlayer1Score() const
 {
     int score = m_ScoreManager->GetFirstPLayerScore();
     return QStringLiteral("Player 1 score: %1!").arg(score);
 }
 
-QString GameContextViewModel::GetPlayer2Score()
+QString GameContextViewModel::GetPlayer2Score() const
 {
     int score = m_ScoreManager->GetSecondPlayerScore();
     return QStringLiteral("Player 2 score: %1!").arg(score);
+}
+
+QString GameContextViewModel::GetGameWinner() const
+{
+    int player1Score = m_ScoreManager->GetFirstPLayerScore();
+    int player2Score = m_ScoreManager->GetSecondPlayerScore();
+
+    if (player1Score> player2Score)
+    {
+        return "Player 1 win !!!";
+    }
+    else if (player1Score < player2Score)
+    {
+        return "Player 2 win !!!";
+    }
+
+    return "Draw";
 }
 
 bool GameContextViewModel::GetIsGameOver() const
