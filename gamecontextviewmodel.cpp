@@ -58,9 +58,7 @@ void GameContextViewModel::ResetGameState()
     emit player2Hit4();
 
     m_ActivePlayer = ScoreManager::Players::Player1;
-
     m_HitCounter = 0;
-    emit GetIsGameOver();
 }
 
 void GameContextViewModel::onMousePositionChanged(float posX, float posY)

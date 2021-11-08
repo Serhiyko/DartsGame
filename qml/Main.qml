@@ -9,6 +9,10 @@ GameWindow {
 
     GameContextViewModel {
         id: gamecontext
+        onGameOver: {
+            newGameButton.visible = true
+            dartsMouseArea.cursorShape = Qt.ArrowCursor
+        }
     }
 
     Scene {
@@ -118,6 +122,7 @@ GameWindow {
             }
 
             MouseArea {
+                id: dartsMouseArea
                 anchors.fill: parent
                 hoverEnabled: true
                 cursorShape: Qt.BlankCursor
@@ -165,7 +170,7 @@ GameWindow {
             color: "#32665a"
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.verticalCenter:  parent.verticalCenter
-            visible: gamecontext.isGameOver
+            visible: false
 
             Text {
                 text: "New Game"
@@ -177,6 +182,7 @@ GameWindow {
                 anchors.fill: parent
                 onClicked: {
                     parent.visible = false
+                    dartsMouseArea.cursorShape = Qt.BlankCursor
                     gamecontext.onNewGameButtonClicked()
                 }
             }
